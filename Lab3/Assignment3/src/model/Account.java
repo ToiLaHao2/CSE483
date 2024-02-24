@@ -72,6 +72,13 @@ public class Account {
         }
     }
 
+    public boolean checkUser(String username, String password) {
+        if (_owner.getName().equals(username) && this._owner.getPassword().equals(password)) {
+            return true;
+        }
+        return false;
+    }
+
     public String getTransaction() {
         StringBuilder sb = new StringBuilder();
         for (String tr : this._transactionHistory) {

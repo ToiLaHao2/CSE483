@@ -9,14 +9,11 @@ public class User {
         this._password = password;
     }
 
-    public boolean checkUser(String username, String password) {
-        if (_username.equals(username) && password.equals(password)) {
-            return true;
-        }
-        return false;
-    }
-
     public String getName() {
         return this._username;
+    }
+
+    public String getPassword() {
+        return this._password;
     }
 }

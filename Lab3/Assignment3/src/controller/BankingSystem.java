@@ -30,13 +30,13 @@ public class BankingSystem {
         System.out.println("Account created successfully!");
     }
 
-    public boolean authenticateUser(String username, String password) {
-        for (User user : inmemoryCollection.getUsers()) {
-            if (user.checkUser(username, password)) {
-                return true;
+    public Account authenticateUser(String username, String password) {
+        for (Account acc : inmemoryCollection.getAccounts()) {
+            if (acc.checkUser(username, password)) {
+                return acc;
             }
         }
-        return false;
+        return null;
     }
 
     public void printTransaction() {
@@ -88,7 +88,7 @@ public class BankingSystem {
     }
 
     public void transactionLog(Account account) {
-        System.out.println(Account.getTransaction());
+        System.out.println(account.getTransaction());
     }
 
 }

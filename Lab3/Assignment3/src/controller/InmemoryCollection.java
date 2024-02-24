@@ -28,14 +28,14 @@ public class InmemoryCollection {
         String[] userName1 = { "Nguyen Van A", "Nguyen Van B", "Nguyen Van C", "Nguyen Van D", "Nguyen Van E" };
 
         for (int i = 0; i < userName1.length; i++) {
-            User user = new User(userName1[i], userName1[i] + i);
+            User user = new User(userName1[i], "123");
             listUser.add(user);
             listAccount.add(new Account("Account" + i, user));
         }
 
         for (Account acc : listAccount) {
             int accountType = rd.nextInt(1, 3);
-            System.out.println(accountType);
+            acc.setAccountType(accountType);
         }
     }
 

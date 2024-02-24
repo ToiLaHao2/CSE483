@@ -2,30 +2,33 @@ package view;
 
 import java.util.Scanner;
 
-import controller.authenticateUser;
+import controller.BankingSystem;
+import model.Account;
 
 public class LoginView {
     private Scanner sc;
-    private String username;
-    private String password;
+    private BankingSystem _BankingSystem;
+    private Account acc;
 
-    public LoginView() {
-        sc = new Scanner(System.in);
-        System.out.println("Enter your account name");
-        String userNameInput = sc.nextLine();
-        this.username = userNameInput;
-        System.out.println("Enter password");
-        String passWordInput = sc.nextLine();
-        this.password = passWordInput;
-        if (authenticateUser() == true) {
-            System.out.println("Welcome " + username + ", you are successfully logged in.");
+    public LoginView(BankingSystem bankingSystem) {
+        this._BankingSystem = bankingSystem;
+        this.sc = new Scanner(System.in);
+    }
+
+    public boolean Login() {
+        System.out.println("Please enter your username:");
+        String userName = sc.nextLine();
+        System.out.println("Please enter your password:");
+        String password = sc.nextLine();
+        acc = _BankingSystem.authenticateUser(userName, password);
+        if (acc != null) {
+            return true;
         } else {
-            System.out.println("Username or Password is incorrect!");
+            return false;
         }
     }
 
-    private boolean authenticateUser() {
-        authenticateUser authenticate = new authenticateUser();
-        return authenticate.authenticate(username, password);
+    public Account getAcc() {
+        return acc;
     }
 }
