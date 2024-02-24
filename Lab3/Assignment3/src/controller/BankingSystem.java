@@ -49,17 +49,46 @@ public class BankingSystem {
         System.out.println(account.toString());
     }
 
-    public void deposit(String accountNumber, double amount) {
+    public boolean deposit(String accountNumber, double amount) {
         Account account = inmemoryCollection.findAccountByAccountNumber(accountNumber);
         if (account == null) {
             System.out.println("Account not found");
+            return false;
+        }
+        if (account.getAccountType() == AccountType.LOAN) {
+            System.out.println("You can not deposit because this is a LOAN account!");
+            return false;
         } else {
             String desc = new String("Deposit " + amount + " for account " + accountNumber);
             Transaction transaction = new Transaction(TransType.DEPOSIT, desc, amount, account);
             account.deposit(transaction);
             inmemoryCollection.getTransactions().add(transaction);
             System.out.println("Deposited " + amount + " Successfully! for account " + accountNumber);
+            return true;
         }
+    }
+
+    public boolean withdraw(String accountNumber, double moneyWithdraw) {
+        Account account = inmemoryCollection.findAccountByAccountNumber(accountNumber);
+        if (account == null) {
+            System.out.println("Account not found");
+            return false;
+        }
+        if (account.getAccountType() == AccountType.CHECKING) {
+            String desc = new String("Withdraw " + moneyWithdraw + " from account " + accountNumber);
+            Transaction transaction = new Transaction(TransType.WITHDRAWAL, desc, moneyWithdraw, account);
+            if (account.withdraw(transaction)) {
+                inmemoryCollection.getTransactions().add(transaction);
+                System.out.println("Withdraw " + moneyWithdraw + " Successfully! from account " + accountNumber);
+                return true;
+            } else
+                return false;
+        }
+        return false;
+    }
+
+    public void transactionLog(Account account) {
+        System.out.println(Account.getTransaction());
     }
 
 }

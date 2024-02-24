@@ -33,6 +33,10 @@ public class Account {
         return _balance;
     }
 
+    public AccountType getAccountType() {
+        return this._accountType;
+    }
+
     public boolean compareOwner(User user) {
         if (this._owner.getName() == user.getName()) {
             return true;
@@ -56,6 +60,24 @@ public class Account {
     public void deposit(Transaction transaction) {
         _transactionHistory.add(transaction.toString());
         this._balance += transaction.getAmount();
+    }
+
+    public boolean withdraw(Transaction transaction) {
+        if (this._balance >= transaction.getAmount()) {
+            this._balance -= transaction.getAmount();
+            _transactionHistory.add(transaction.toString());
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public String getTransaction() {
+        StringBuilder sb = new StringBuilder();
+        for (String tr : this._transactionHistory) {
+            sb.append(tr + "/n");
+        }
+        return sb.toString();
     }
 
     @Override
