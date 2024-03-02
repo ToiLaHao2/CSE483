@@ -106,7 +106,16 @@ public class Database {
             System.out.println("Databse Opened...\n");
             String sql = "DELETE FROM " + tableName.toLowerCase() + " WHERE id=" + id + ";";
             Statement stmt = con.createStatement();
-            stmt.executeUpdate(sql);
+            if (tableName.equals("books")) {
+                stmt.executeUpdate(sql);
+                String sql1 = "DELETE FROM checkouts WHERE book_id = " + id + ";";
+                stmt.executeUpdate(sql1);
+            } else if (tableName.equals("borrowers")) {
+                stmt.executeUpdate(sql);
+                String sql1 = "DELETE FROM checkouts WHERE borrower_id = " + id + ";";
+                stmt.executeUpdate(sql1);
+            }
+
             System.out.println("Delete success");
             stmt.close();
             con.close();
