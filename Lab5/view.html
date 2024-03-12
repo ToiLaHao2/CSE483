@@ -106,7 +106,7 @@
                         style="
                             text-align: right;
                             margin-bottom: 5px;
-                            margin-right: 5%;
+                            margin-right: 9%;
                         "
                     >
                         <button id="add-book">Register Book</button>
@@ -117,7 +117,56 @@
                     <div id="recordContents"></div>
                 </div>
             </div>
-            
+            <div class="row mt-4" style="border: 1px solid black">
+                <div class="col">
+                    <h1>Borrow book</h1>
+                    <div class="input-group">
+                        <span class="title">Name : </span>
+                        <input
+                            type="text"
+                            name="name"
+                            id="name"
+                            required
+                            value=""
+                            style="margin-left: 5px"
+                            class="input-field"
+                        />
+                    </div>
+                    <div class="input-group">
+                        <span class="title">Name of book : </span>
+                        <input
+                            type="text"
+                            name="nameOfBook"
+                            id="nameOfBook"
+                            required
+                            value=""
+                            style="margin-left: 5px"
+                            class="input-field"
+                        />
+                    </div>
+                    <div class="input-group">
+                        <span class="title">Number of book : </span>
+                        <input
+                            type="text"
+                            name="numOBook"
+                            id="numOBook"
+                            required
+                            value=""
+                            style="margin-left: 5px"
+                            class="input-field"
+                        />
+                    </div>
+                    <div
+                        style="
+                            text-align: right;
+                            margin-bottom: 5px;
+                            margin-right: 9%;
+                        "
+                    >
+                        <button id="borrow-book">Borrow Book</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
     <script>
@@ -143,6 +192,15 @@
                 });
             });
         }
+
+        let borrowing = document.getElementById("borrow-book");
+        borrowing.onclick = function () {
+            let nameOfBorrower = document.getElementById("name").value;
+            console.log(nameOfBorrower);
+            let nameOfBook = document.getElementById("nameOfBook").value;
+            let numOfBook = document.getElementById("numOBook").value;
+            borrowBook(nameOfBorrower, nameOfBook, numOfBook);
+        };
     </script>
     <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

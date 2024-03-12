@@ -1,3 +1,5 @@
+//Database layer
+
 let books = [
     {
         title: "book 1",
@@ -57,6 +59,7 @@ let records = [
     },
 ];
 
+//Business layer
 function loadBook() {
     let str = "";
     for (let book of books) {
@@ -98,17 +101,21 @@ function removeBook(title) {
     books = books.filter((book) => book.title !== title);
     loadBook();
 }
-function borrowBook(title) {
-    let i = o;
+function borrowBook(nameOfBorrower, title, numberOfBook) {
+    let i = 0;
     for (let index = 0; index < books.length; index++) {
         if (books[i].title == title) {
             if (books[i].availableQuantity > 0) {
-                books[i].availableQuantity--;
+                books[i].availableQuantity -= numberOfBook;
                 alert(title + " has been successfully borrowed!");
                 loadBook();
-                records.push({ borrowerName: userName, bookTitle: title });
+                records.push({
+                    borrowerName: nameOfBorrower,
+                    bookTitle: title,
+                });
                 break;
             }
         }
     }
+    loadRecord();
 }
